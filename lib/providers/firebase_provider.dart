@@ -145,10 +145,6 @@ class FirebaseProvider with ChangeNotifier {
                 text: isRegister
                     ? 'Registered Successfully.'
                     : 'User added Successfully.');
-            // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            //     content: Text(isRegister
-            //         ? 'Registered Successfully.'
-            //         : 'User added Successfully.')));
             clearTextControllers();
             Navigator.pushReplacement(
               context,
@@ -160,11 +156,6 @@ class FirebaseProvider with ChangeNotifier {
         );
       } else {
         mySnackBar(context: context, text: 'User Name not avilable!');
-        // ScaffoldMessenger.of(context).showSnackBar(
-        //   const SnackBar(
-        //     content: Text('User Name not avilable!'),
-        //   ),
-        // );
       }
     }
   }
@@ -173,8 +164,6 @@ class FirebaseProvider with ChangeNotifier {
     FirebaseFirestore db = FirebaseFirestore.instance;
     if (_userName == null || _password == null) {
       mySnackBar(context: context, text: 'Please fill all the fields.');
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //     const SnackBar(content: Text('Please fill all the fields.')));
     } else {
       var userRef = await db.collection('users').doc(_userName).get();
       if (userRef.exists) {
@@ -189,13 +178,6 @@ class FirebaseProvider with ChangeNotifier {
             role: userData['role'],
           );
           mySnackBar(context: context, text: 'Logged in Successfully.');
-          // ScaffoldMessenger.of(context).showSnackBar(
-          //   const SnackBar(
-          //     content: Text(
-          //       'Logged in Successfully.',
-          //     ),
-          //   ),
-          // );
           clearTextControllers();
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => const HomeScreen()));
@@ -203,13 +185,9 @@ class FirebaseProvider with ChangeNotifier {
           mySnackBar(
               context: context,
               text: 'Please type correct User name and Password.');
-          // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          //     content: Text('Please type correct User name and Password.')));
         }
       } else {
         mySnackBar(context: context, text: 'User not found.');
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text('User not found.')));
       }
     }
   }
@@ -226,23 +204,17 @@ class FirebaseProvider with ChangeNotifier {
       var userRef = db.collection('users').doc(_userName);
       userRef.set({'password': _newPassword}, SetOptions(merge: true));
       mySnackBar(context: context, text: 'Password changed successfully.');
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //     const SnackBar(content: Text('Password changed successfully.')));
       passwordController.clear();
       newPasswordController.clear();
       Navigator.pop(context);
     } else {
       mySnackBar(context: context, text: 'Please enter a correct Password.');
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //     const SnackBar(content: Text('Please enter a correct Password.')));
     }
   }
 
   checkPassword(BuildContext context) {
     if (_password != currentUser!.password) {
       mySnackBar(context: context, text: 'Please Enter correct PassWord');
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //     const SnackBar(content: Text('Please Enter correct PassWord')));
     }
   }
 

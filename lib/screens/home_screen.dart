@@ -63,7 +63,6 @@ class HomeScreen extends StatelessWidget {
       body: ListView.builder(
         itemBuilder: (context, index) => Container(
           padding: const EdgeInsets.symmetric(horizontal: 5),
-          // height: mediaQuery.size.height * 0.1,
           width: mediaQuery.size.width,
           child: Column(
             children: [
